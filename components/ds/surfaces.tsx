@@ -25,7 +25,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode; disa
 
   return (
     <div>
-      <div role="tablist" onKeyDown={onKeyDown} className="flex gap-1 border-b border-j-border-subtle">
+      <div role="tablist" onKeyDown={onKeyDown} className="flex gap-1 border-b border-ds-border-subtle">
         {tabs.map((t, i) => {
           const selected = i === active;
           return (
@@ -40,11 +40,11 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode; disa
               disabled={t.disabled}
               onClick={() => setActive(i)}
               className={cx(
-                "j-label -mb-px h-12 cursor-pointer rounded-t-j-sm border-b-2 px-5 outline-none transition-colors",
-                "fx-focus:j-focus-ring disabled:cursor-not-allowed disabled:text-j-muted/60",
+                "ds-label -mb-px h-12 cursor-pointer rounded-t-ds-sm border-b-[length:var(--ds-bw-strong)] px-5 outline-none transition-colors",
+                "fx-focus:ds-focus-ring disabled:cursor-not-allowed disabled:text-ds-muted/60",
                 selected
-                  ? "border-j-accent text-j-accent"
-                  : "border-transparent text-j-muted fx-hover:bg-j-raised fx-hover:text-j-text",
+                  ? "border-ds-border-strong text-ds-accent-text"
+                  : "border-transparent text-ds-muted fx-hover:bg-ds-raised fx-hover:text-ds-text",
               )}
             >
               {t.label}
@@ -64,9 +64,9 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode; disa
 // ---------- Nav bar ----------
 export function NavBar({ items, current }: { items: string[]; current: string }) {
   return (
-    <nav aria-label="Primary" className="flex items-center justify-between gap-6 rounded-j-lg border border-j-border-subtle bg-j-surface px-6 py-3">
-      <span className="j-h3 text-j-text">
-        Los Mirlos<span className="text-j-accent">.</span>
+    <nav aria-label="Primary" className="flex items-center justify-between gap-6 rounded-ds-lg border border-ds-border-subtle bg-ds-surface px-6 py-3">
+      <span className="ds-h3 text-ds-text">
+        Los Mirlos<span className="text-ds-accent-text">.</span>
       </span>
       <ul className="flex flex-wrap items-center gap-1">
         {items.map((item) => (
@@ -75,10 +75,10 @@ export function NavBar({ items, current }: { items: string[]; current: string })
               href="#"
               aria-current={item === current ? "page" : undefined}
               className={cx(
-                "j-label inline-flex h-10 items-center rounded-j-sm px-3 outline-none transition-colors fx-focus:j-focus-ring",
+                "ds-label inline-flex h-10 items-center rounded-ds-sm px-3 outline-none transition-colors fx-focus:ds-focus-ring",
                 item === current
-                  ? "text-j-accent underline decoration-2 underline-offset-8"
-                  : "text-j-muted fx-hover:bg-j-raised fx-hover:text-j-text",
+                  ? "text-ds-accent-text underline decoration-2 underline-offset-8"
+                  : "text-ds-muted fx-hover:bg-ds-raised fx-hover:text-ds-text",
               )}
             >
               {item}
@@ -93,7 +93,7 @@ export function NavBar({ items, current }: { items: string[]; current: string })
 // ---------- Cards ----------
 type CardState = "rest" | "hover" | "selected" | "disabled";
 
-/** Image card. The photo sits in a leaf-shaped frame; swap `src` for any image in /photos. */
+/** Image card. The photo sits in a signature-shaped frame; swap `src` for any image in /photos. */
 export function Card({
   src,
   alt = "",
@@ -116,21 +116,21 @@ export function Card({
       data-force={force}
       aria-disabled={state === "disabled" || undefined}
       className={cx(
-        "group overflow-hidden rounded-j-leaf border-[1.5px] bg-j-surface shadow-j-1 transition-[transform,box-shadow,border-color] duration-200",
-        state === "selected" ? "border-j-accent shadow-j-glow" : "border-j-border",
+        "group overflow-hidden rounded-ds-sig border-[length:var(--ds-bw)] bg-ds-surface shadow-ds-1 transition-[transform,box-shadow,border-color] duration-200",
+        state === "selected" ? "border-ds-border-strong shadow-ds-glow" : "border-ds-border",
         state === "disabled" && "opacity-50 grayscale",
-        state !== "disabled" && "fx-hover:-translate-y-1 fx-hover:border-j-accent fx-hover:shadow-j-2",
-        state === "hover" && "-translate-y-1 border-j-accent shadow-j-2",
+        state !== "disabled" && "fx-hover:-translate-y-1 fx-hover:border-ds-border-strong fx-hover:shadow-ds-2",
+        state === "hover" && "-translate-y-1 border-ds-border-strong shadow-ds-2",
       )}
     >
-      <div className="aspect-[4/3] overflow-hidden bg-j-raised">
+      <div className="aspect-[4/3] overflow-hidden bg-ds-raised">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt} loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
       </div>
       <div className="flex flex-col gap-1 p-5">
-        {eyebrow && <p className="j-label text-j-terracotta">{eyebrow}</p>}
-        <h3 className="j-h3">{title}</h3>
-        {meta && <p className="j-caption text-j-muted">{meta}</p>}
+        {eyebrow && <p className="ds-label text-ds-accent-2">{eyebrow}</p>}
+        <h3 className="ds-h3">{title}</h3>
+        {meta && <p className="ds-caption text-ds-muted">{meta}</p>}
       </div>
     </article>
   );
@@ -140,28 +140,28 @@ export function Card({
 export function CoverFrame({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
   return (
     <figure className="inline-block">
-      <div className="rounded-j-md border-2 border-dotted border-j-accent p-2">
+      <div className="rounded-ds-md p-2" style={{ border: "var(--ds-frame)" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt} className="aspect-square w-full rounded-j-sm object-cover shadow-j-2" />
+        <img src={src} alt={alt} className="aspect-square w-full rounded-ds-sm object-cover shadow-ds-2" />
       </div>
-      {caption && <figcaption className="j-caption mt-2 text-j-muted">{caption}</figcaption>}
+      {caption && <figcaption className="ds-caption mt-2 text-ds-muted">{caption}</figcaption>}
     </figure>
   );
 }
 
 /** Object on a paper-colored tile with a colored base. `mix-blend-multiply` drops the white box of opaque product photos into the paper. */
-export function CutoutTile({ src, alt, label, tone = "terracotta" }: { src: string; alt: string; label: string; tone?: "terracotta" | "teal" | "accent" }) {
-  const bar = { terracotta: "bg-j-terracotta", teal: "bg-j-teal", accent: "bg-j-accent" }[tone];
+export function CutoutTile({ src, alt, label, tone = "secondary" }: { src: string; alt: string; label: string; tone?: "secondary" | "info" | "accent" }) {
+  const bar = { secondary: "bg-ds-accent-2", info: "bg-ds-info", accent: "bg-ds-accent" }[tone];
   return (
     <figure className="flex flex-col gap-2">
-      <div className="overflow-hidden rounded-j-lg bg-j-text">
+      <div className="overflow-hidden rounded-ds-lg bg-ds-paper">
         <div className="flex aspect-square items-center justify-center p-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt={alt} loading="lazy" className="max-h-full max-w-full object-contain mix-blend-multiply" />
         </div>
         <div className={cx("h-2", bar)} />
       </div>
-      <figcaption className="j-label text-j-muted">{label}</figcaption>
+      <figcaption className="ds-label text-ds-muted">{label}</figcaption>
     </figure>
   );
 }
@@ -188,21 +188,21 @@ export function TrackRow({
       aria-current={state === "selected" ? "true" : undefined}
       aria-disabled={state === "disabled" || undefined}
       className={cx(
-        "flex items-center gap-4 border-b border-j-border-subtle px-4 py-3 outline-none transition-colors",
-        "fx-focus:bg-j-raised fx-focus:shadow-[inset_0_0_0_2px_var(--j-accent)]",
-        state === "selected" && "border-l-4 border-l-j-accent bg-j-raised",
-        state === "rest" && "fx-hover:bg-j-raised",
+        "flex items-center gap-4 border-b border-ds-border-subtle px-4 py-3 outline-none transition-colors",
+        "fx-focus:bg-ds-raised fx-focus:shadow-[inset_0_0_0_2px_var(--ds-focus)]",
+        state === "selected" && "border-l-4 border-l-ds-border-strong bg-ds-raised",
+        state === "rest" && "fx-hover:bg-ds-raised",
         state === "disabled" && "cursor-not-allowed opacity-45",
       )}
     >
-      <span className="j-label w-6 text-j-muted tabular-nums">{String(n).padStart(2, "0")}</span>
+      <span className="ds-label w-6 text-ds-muted tabular-nums">{String(n).padStart(2, "0")}</span>
       <span className="flex-1">
-        <span className={cx("j-body-strong block", state === "selected" && "text-j-accent")}>{title}</span>
-        {note && <span className="j-caption block text-j-muted">{note}</span>}
+        <span className={cx("ds-body-strong block", state === "selected" && "text-ds-accent-text")}>{title}</span>
+        {note && <span className="ds-caption block text-ds-muted">{note}</span>}
       </span>
       {state === "selected" && <Badge tone="accent">Playing</Badge>}
       {state === "disabled" && <Badge>Unavailable</Badge>}
-      <span className="j-caption text-j-muted tabular-nums">{length}</span>
+      <span className="ds-caption text-ds-muted tabular-nums">{length}</span>
     </li>
   );
 }
@@ -210,7 +210,7 @@ export function TrackRow({
 // ---------- Detail panel ----------
 export function DetailPanel({ src, eyebrow, title, children, onClose }: { src: string; eyebrow: string; title: string; children: ReactNode; onClose?: () => void }) {
   return (
-    <div className="overflow-hidden rounded-j-lg border border-j-accent/30 bg-j-raised shadow-j-3 sm:grid sm:grid-cols-[minmax(0,2fr)_3fr]">
+    <div className="overflow-hidden rounded-ds-lg border border-ds-border-strong/30 bg-ds-raised shadow-ds-3 sm:grid sm:grid-cols-[minmax(0,2fr)_3fr]">
       <div className="relative h-48 sm:h-auto sm:min-h-64">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt="" className="absolute inset-0 size-full object-cover" />
@@ -218,8 +218,8 @@ export function DetailPanel({ src, eyebrow, title, children, onClose }: { src: s
       <div className="flex flex-col gap-4 p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="j-label text-j-terracotta">{eyebrow}</p>
-            <h3 className="j-h2 mt-1">{title}</h3>
+            <p className="ds-label text-ds-accent-2">{eyebrow}</p>
+            <h3 className="ds-h2 mt-1">{title}</h3>
           </div>
           {onClose && (
             <Button variant="ghost" aria-label="Close" onClick={onClose} className="size-11 shrink-0 !px-0 text-lg">
@@ -227,7 +227,7 @@ export function DetailPanel({ src, eyebrow, title, children, onClose }: { src: s
             </Button>
           )}
         </div>
-        <div className="j-body text-j-muted">{children}</div>
+        <div className="ds-body text-ds-muted">{children}</div>
       </div>
     </div>
   );
@@ -246,17 +246,17 @@ export function ModalDemo({ triggerLabel, src, eyebrow, title, children }: { tri
         ref={ref}
         aria-labelledby={titleId}
         onClick={(e) => e.target === ref.current && ref.current?.close()}
-        className="m-auto w-[min(44rem,calc(100vw-2rem))] overflow-visible bg-transparent p-0 text-j-text backdrop:bg-black/75 backdrop:backdrop-blur-sm"
+        className="m-auto w-[min(44rem,calc(100vw-2rem))] overflow-visible bg-transparent p-0 text-ds-text backdrop:bg-black/75 backdrop:backdrop-blur-sm"
       >
-        <div className="overflow-hidden rounded-j-lg border border-j-accent/30 bg-j-raised shadow-j-3">
+        <div className="overflow-hidden rounded-ds-lg border border-ds-border-strong/30 bg-ds-raised shadow-ds-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt="" className="h-48 w-full object-cover" />
           <div className="flex flex-col gap-4 p-6">
-            <p className="j-label text-j-terracotta">{eyebrow}</p>
-            <h3 id={titleId} className="j-h2">
+            <p className="ds-label text-ds-accent-2">{eyebrow}</p>
+            <h3 id={titleId} className="ds-h2">
               {title}
             </h3>
-            <div className="j-body text-j-muted">{children}</div>
+            <div className="ds-body text-ds-muted">{children}</div>
             <div className="flex justify-end gap-3 pt-2">
               <Button variant="ghost" onClick={() => ref.current?.close()}>
                 Close
@@ -273,14 +273,14 @@ export function ModalDemo({ triggerLabel, src, eyebrow, title, children }: { tri
 // ---------- Pull quote ----------
 export function PullQuote({ children, cite }: { children: ReactNode; cite: string }) {
   return (
-    <blockquote className="border-l-4 border-j-terracotta pl-6">
-      <p className="j-h2 italic text-j-text">{children}</p>
-      <footer className="j-label mt-3 text-j-muted">{cite}</footer>
+    <blockquote className="border-l-4 border-ds-accent-2 pl-6">
+      <p className="ds-h2 italic text-ds-text">{children}</p>
+      <footer className="ds-label mt-3 text-ds-muted">{cite}</footer>
     </blockquote>
   );
 }
 
 // ---------- Divider ----------
-export function NazcaDivider() {
-  return <hr className="border-0 border-t-2 border-dotted border-j-accent/60" />;
+export function Divider() {
+  return <hr className="border-0" style={{ borderTop: "var(--ds-divider)" }} />;
 }

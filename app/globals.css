@@ -25,37 +25,40 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ---------- Jungle design system ----------
-   Values are injected as --j-* variables by <JungleTheme> (lib/jungle-tokens.ts). */
+/* ---------- Design systems (jungle / minimalistic / psychedelic) ----------
+   Each system sets --ds-* variables on its wrapper (lib/design-systems/*, components/ds/theme.tsx).
+   Components only ever reference the ds-* utilities below, so they restyle per theme. */
 @theme inline {
-  --color-j-bg: var(--j-bg);
-  --color-j-surface: var(--j-surface);
-  --color-j-raised: var(--j-raised);
-  --color-j-text: var(--j-text);
-  --color-j-muted: var(--j-muted);
-  --color-j-border: var(--j-border);
-  --color-j-border-subtle: var(--j-border-subtle);
-  --color-j-accent: var(--j-accent);
-  --color-j-accent-hover: var(--j-accent-hover);
-  --color-j-accent-pressed: var(--j-accent-pressed);
-  --color-j-on-accent: var(--j-on-accent);
-  --color-j-terracotta: var(--j-terracotta);
-  --color-j-teal: var(--j-teal);
-  --color-j-danger: var(--j-danger);
-  --color-j-success: var(--j-success);
+  --color-ds-bg: var(--ds-bg);
+  --color-ds-surface: var(--ds-surface);
+  --color-ds-raised: var(--ds-raised);
+  --color-ds-text: var(--ds-text);
+  --color-ds-muted: var(--ds-muted);
+  --color-ds-border: var(--ds-border);
+  --color-ds-border-subtle: var(--ds-border-subtle);
+  --color-ds-border-strong: var(--ds-border-strong);
+  --color-ds-accent: var(--ds-accent);
+  --color-ds-accent-hover: var(--ds-accent-hover);
+  --color-ds-accent-pressed: var(--ds-accent-pressed);
+  --color-ds-on-accent: var(--ds-on-accent);
+  --color-ds-accent-text: var(--ds-accent-text);
+  --color-ds-focus: var(--ds-focus);
+  --color-ds-accent-2: var(--ds-accent-2);
+  --color-ds-info: var(--ds-info);
+  --color-ds-danger: var(--ds-danger);
+  --color-ds-success: var(--ds-success);
+  --color-ds-paper: var(--ds-paper);
 
-  --radius-j-sm: var(--j-radius-sm);
-  --radius-j-md: var(--j-radius-md);
-  --radius-j-lg: var(--j-radius-lg);
-  --radius-j-leaf: var(--j-radius-leaf);
+  --radius-ds-sm: var(--ds-radius-sm);
+  --radius-ds-md: var(--ds-radius-md);
+  --radius-ds-lg: var(--ds-radius-lg);
+  --radius-ds-sig: var(--ds-radius-sig);
 
-  --shadow-j-1: var(--j-shadow-1);
-  --shadow-j-2: var(--j-shadow-2);
-  --shadow-j-3: var(--j-shadow-3);
-  --shadow-j-glow: var(--j-shadow-glow);
+  --shadow-ds-1: var(--ds-shadow-1);
+  --shadow-ds-2: var(--ds-shadow-2);
+  --shadow-ds-3: var(--ds-shadow-3);
+  --shadow-ds-glow: var(--ds-shadow-glow);
 
-  --font-j-display: var(--font-fraunces);
-  --font-j-body: var(--font-figtree);
 }
 
 /* Interactive states: real pseudo-classes plus data-force so the docs can show every state at once. */
@@ -79,25 +82,25 @@ body {
 }
 
 /* Type roles */
-@utility j-display { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-display-size); line-height: var(--j-type-display-line); font-weight: var(--j-type-display-weight); letter-spacing: var(--j-type-display-tracking); }
-@utility j-h1 { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-h1-size); line-height: var(--j-type-h1-line); font-weight: var(--j-type-h1-weight); letter-spacing: var(--j-type-h1-tracking); }
-@utility j-h2 { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-h2-size); line-height: var(--j-type-h2-line); font-weight: var(--j-type-h2-weight); letter-spacing: var(--j-type-h2-tracking); }
-@utility j-h3 { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-h3-size); line-height: var(--j-type-h3-line); font-weight: var(--j-type-h3-weight); letter-spacing: var(--j-type-h3-tracking); }
-@utility j-body { font-family: var(--font-j-body); font-size: var(--j-type-body-size); line-height: var(--j-type-body-line); font-weight: var(--j-type-body-weight); }
-@utility j-body-strong { font-family: var(--font-j-body); font-size: var(--j-type-bodyStrong-size); line-height: var(--j-type-bodyStrong-line); font-weight: var(--j-type-bodyStrong-weight); }
-@utility j-caption { font-family: var(--font-j-body); font-size: var(--j-type-caption-size); line-height: var(--j-type-caption-line); font-weight: var(--j-type-caption-weight); letter-spacing: var(--j-type-caption-tracking); }
-@utility j-label { font-family: var(--font-j-body); font-size: var(--j-type-label-size); line-height: var(--j-type-label-line); font-weight: var(--j-type-label-weight); letter-spacing: var(--j-type-label-tracking); text-transform: uppercase; }
+@utility ds-display { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-display-size); line-height: var(--ds-type-display-line); font-weight: var(--ds-type-display-weight); letter-spacing: var(--ds-type-display-tracking); text-transform: var(--ds-type-display-transform); }
+@utility ds-h1 { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h1-size); line-height: var(--ds-type-h1-line); font-weight: var(--ds-type-h1-weight); letter-spacing: var(--ds-type-h1-tracking); text-transform: var(--ds-type-h1-transform); }
+@utility ds-h2 { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h2-size); line-height: var(--ds-type-h2-line); font-weight: var(--ds-type-h2-weight); letter-spacing: var(--ds-type-h2-tracking); text-transform: var(--ds-type-h2-transform); }
+@utility ds-h3 { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h3-size); line-height: var(--ds-type-h3-line); font-weight: var(--ds-type-h3-weight); letter-spacing: var(--ds-type-h3-tracking); text-transform: var(--ds-type-h3-transform); }
+@utility ds-body { font-family: var(--ds-font-body); font-size: var(--ds-type-body-size); line-height: var(--ds-type-body-line); font-weight: var(--ds-type-body-weight); letter-spacing: var(--ds-type-body-tracking); text-transform: var(--ds-type-body-transform); }
+@utility ds-body-strong { font-family: var(--ds-font-body); font-size: var(--ds-type-bodyStrong-size); line-height: var(--ds-type-bodyStrong-line); font-weight: var(--ds-type-bodyStrong-weight); letter-spacing: var(--ds-type-bodyStrong-tracking); text-transform: var(--ds-type-bodyStrong-transform); }
+@utility ds-caption { font-family: var(--ds-font-body); font-size: var(--ds-type-caption-size); line-height: var(--ds-type-caption-line); font-weight: var(--ds-type-caption-weight); letter-spacing: var(--ds-type-caption-tracking); text-transform: var(--ds-type-caption-transform); }
+@utility ds-label { font-family: var(--ds-font-body); font-size: var(--ds-type-label-size); line-height: var(--ds-type-label-line); font-weight: var(--ds-type-label-weight); letter-spacing: var(--ds-type-label-tracking); text-transform: var(--ds-type-label-transform); }
 
-/* Shared focus ring */
-@utility j-focus-ring { box-shadow: var(--j-shadow-glow); outline: 2px solid var(--j-accent); outline-offset: 2px; }
+/* Shared focus ring: theme glow + 2px outline in the theme's focus color */
+@utility ds-focus-ring { box-shadow: var(--ds-shadow-glow); outline: 2px solid var(--ds-focus); outline-offset: 2px; }
 
 /* Loading shimmer */
-@keyframes j-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
-@utility j-skeleton {
-  background: linear-gradient(90deg, var(--j-raised) 25%, var(--j-border-subtle) 50%, var(--j-raised) 75%);
+@keyframes ds-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@utility ds-skeleton {
+  background: linear-gradient(90deg, var(--ds-raised) 25%, var(--ds-border-subtle) 50%, var(--ds-raised) 75%);
   background-size: 200% 100%;
-  animation: j-shimmer 1.8s linear infinite;
+  animation: ds-shimmer 1.8s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  .j-skeleton, [class*="j-skeleton"] { animation: none; }
+  .ds-skeleton, [class*="ds-skeleton"] { animation: none; }
 }
