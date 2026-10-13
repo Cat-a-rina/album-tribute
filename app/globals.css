@@ -24,3 +24,80 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ---------- Jungle design system ----------
+   Values are injected as --j-* variables by <JungleTheme> (lib/jungle-tokens.ts). */
+@theme inline {
+  --color-j-bg: var(--j-bg);
+  --color-j-surface: var(--j-surface);
+  --color-j-raised: var(--j-raised);
+  --color-j-text: var(--j-text);
+  --color-j-muted: var(--j-muted);
+  --color-j-border: var(--j-border);
+  --color-j-border-subtle: var(--j-border-subtle);
+  --color-j-accent: var(--j-accent);
+  --color-j-accent-hover: var(--j-accent-hover);
+  --color-j-accent-pressed: var(--j-accent-pressed);
+  --color-j-on-accent: var(--j-on-accent);
+  --color-j-terracotta: var(--j-terracotta);
+  --color-j-teal: var(--j-teal);
+  --color-j-danger: var(--j-danger);
+  --color-j-success: var(--j-success);
+
+  --radius-j-sm: var(--j-radius-sm);
+  --radius-j-md: var(--j-radius-md);
+  --radius-j-lg: var(--j-radius-lg);
+  --radius-j-leaf: var(--j-radius-leaf);
+
+  --shadow-j-1: var(--j-shadow-1);
+  --shadow-j-2: var(--j-shadow-2);
+  --shadow-j-3: var(--j-shadow-3);
+  --shadow-j-glow: var(--j-shadow-glow);
+
+  --font-j-display: var(--font-fraunces);
+  --font-j-body: var(--font-figtree);
+}
+
+/* Interactive states: real pseudo-classes plus data-force so the docs can show every state at once. */
+@custom-variant fx-hover {
+  &:hover:not(:disabled, [aria-disabled="true"]),
+  &[data-force="hover"] {
+    @slot;
+  }
+}
+@custom-variant fx-focus {
+  &:focus-visible,
+  &[data-force="focus"] {
+    @slot;
+  }
+}
+@custom-variant fx-press {
+  &:active:not(:disabled, [aria-disabled="true"]),
+  &[data-force="pressed"] {
+    @slot;
+  }
+}
+
+/* Type roles */
+@utility j-display { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-display-size); line-height: var(--j-type-display-line); font-weight: var(--j-type-display-weight); letter-spacing: var(--j-type-display-tracking); }
+@utility j-h1 { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-h1-size); line-height: var(--j-type-h1-line); font-weight: var(--j-type-h1-weight); letter-spacing: var(--j-type-h1-tracking); }
+@utility j-h2 { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-h2-size); line-height: var(--j-type-h2-line); font-weight: var(--j-type-h2-weight); letter-spacing: var(--j-type-h2-tracking); }
+@utility j-h3 { font-family: var(--font-j-display); font-variation-settings: "SOFT" 70, "WONK" 1; font-size: var(--j-type-h3-size); line-height: var(--j-type-h3-line); font-weight: var(--j-type-h3-weight); letter-spacing: var(--j-type-h3-tracking); }
+@utility j-body { font-family: var(--font-j-body); font-size: var(--j-type-body-size); line-height: var(--j-type-body-line); font-weight: var(--j-type-body-weight); }
+@utility j-body-strong { font-family: var(--font-j-body); font-size: var(--j-type-bodyStrong-size); line-height: var(--j-type-bodyStrong-line); font-weight: var(--j-type-bodyStrong-weight); }
+@utility j-caption { font-family: var(--font-j-body); font-size: var(--j-type-caption-size); line-height: var(--j-type-caption-line); font-weight: var(--j-type-caption-weight); letter-spacing: var(--j-type-caption-tracking); }
+@utility j-label { font-family: var(--font-j-body); font-size: var(--j-type-label-size); line-height: var(--j-type-label-line); font-weight: var(--j-type-label-weight); letter-spacing: var(--j-type-label-tracking); text-transform: uppercase; }
+
+/* Shared focus ring */
+@utility j-focus-ring { box-shadow: var(--j-shadow-glow); outline: 2px solid var(--j-accent); outline-offset: 2px; }
+
+/* Loading shimmer */
+@keyframes j-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@utility j-skeleton {
+  background: linear-gradient(90deg, var(--j-raised) 25%, var(--j-border-subtle) 50%, var(--j-raised) 75%);
+  background-size: 200% 100%;
+  animation: j-shimmer 1.8s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .j-skeleton, [class*="j-skeleton"] { animation: none; }
+}

@@ -18,3 +18,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `/photos` is the source of truth for images. `scripts/sync-photos.mjs` copies it to `public/photos` on `predev`/`prebuild` (the copy is gitignored). Don't edit `public/photos`.
 - Moodboards are registered in `lib/moodboards.ts`; each slug maps to a folder in `/photos` and a page at `/moodboards/[slug]`.
 - Use plain `<img>` for photos (image optimization is off for static export).
+- Design systems live at `/design-systems/<name>`. Jungle: tokens in `lib/jungle-tokens.ts` (single source; injected as `--j-*` CSS vars by `components/jungle/theme.tsx`), Tailwind utilities `bg-j-*`, `text-j-*`, `rounded-j-*`, `shadow-j-*`, type roles `j-display|j-h1..h3|j-body|j-caption|j-label` in `app/globals.css`, components in `components/jungle/`.
+- State styling uses custom variants `fx-hover`, `fx-focus`, `fx-press`, which match the real pseudo-class or `data-force="hover|focus|pressed"` (used only to display states in the docs).
+- Some instrument photos (guitars, timbales, güiro, tambourine) are opaque JPG/PNG with white backgrounds; `CutoutTile` uses `mix-blend-multiply` to hide that.

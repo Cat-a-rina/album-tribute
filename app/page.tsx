@@ -47,9 +47,33 @@ export default function Home() {
 
       <section className="mb-16">
         <h2 className="mb-6 text-xl font-medium">Design systems</h2>
-        <p className="rounded-lg border border-dashed border-foreground/20 p-6 text-sm text-foreground/50">
-          Empty for now.
-        </p>
+        <ul className="grid gap-6 sm:grid-cols-3">
+          <li>
+            <Link
+              href="/design-systems/jungle"
+              className="group block overflow-hidden rounded-lg border border-foreground/15 transition-colors hover:border-foreground/50"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/photos/jungle/peruOlderDrawings.jpg"
+                alt=""
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <div className="p-4">
+                <h3 className="font-medium group-hover:underline">Jungle</h3>
+                <p className="mt-1 text-sm text-foreground/60">
+                  Color, type, shape, components, states
+                </p>
+              </div>
+            </Link>
+          </li>
+          <li className="rounded-lg border border-dashed border-foreground/20 p-6 text-sm text-foreground/50">
+            Minimalistic: not started
+          </li>
+          <li className="rounded-lg border border-dashed border-foreground/20 p-6 text-sm text-foreground/50">
+            Psychedelic: not started
+          </li>
+        </ul>
       </section>
 
       <section>
