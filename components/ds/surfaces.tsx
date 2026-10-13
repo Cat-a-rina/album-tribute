@@ -166,6 +166,37 @@ export function CutoutTile({ src, alt, label, tone = "secondary" }: { src: strin
   );
 }
 
+/** Duotone photo: grayscale image multiplied onto a flat color, like a one-ink print. Tone picks the ink. */
+export function DuotoneImage({
+  src,
+  alt,
+  label,
+  tone,
+  aspect = "aspect-[4/3]",
+}: {
+  src: string;
+  alt: string;
+  label: string;
+  tone: "original" | "ink" | "accent" | "tint";
+  aspect?: string;
+}) {
+  const field = { original: "", ink: "bg-ds-bg", accent: "bg-ds-accent", tint: "bg-ds-raised" }[tone];
+  return (
+    <figure className="flex flex-col gap-2">
+      <div className={cx("overflow-hidden", field, aspect)}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className={cx("size-full object-cover", tone !== "original" && "mix-blend-multiply contrast-125 grayscale")}
+        />
+      </div>
+      <figcaption className="ds-label text-ds-muted">{label}</figcaption>
+    </figure>
+  );
+}
+
 // ---------- List row (tracklist) ----------
 export function TrackRow({
   n,

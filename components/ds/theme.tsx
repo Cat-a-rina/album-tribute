@@ -7,7 +7,7 @@ export function DesignTheme({ system, children, className = "" }: { system: Desi
     <div
       data-theme={system.slug}
       className={`bg-ds-bg text-ds-text ds-body ${className}`}
-      style={designVars(system) as CSSProperties}
+      style={{ ...designVars(system), ...(system.texture ? { backgroundImage: system.texture } : {}) } as CSSProperties}
     >
       {children}
     </div>

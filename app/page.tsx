@@ -20,7 +20,7 @@ export default function Home() {
         <h2 className="mb-6 text-xl font-medium">Moodboards</h2>
         <ul className="grid gap-6 sm:grid-cols-3">
           {moodboards.map((board) => {
-            const images = getMoodboardImages(board.slug);
+            const images = getMoodboardImages(board.folder);
             return (
               <li key={board.slug}>
                 <Link

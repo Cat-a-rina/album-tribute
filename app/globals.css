@@ -25,7 +25,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ---------- Design systems (jungle / minimalistic / psychedelic) ----------
+/* ---------- Design systems (jungle / relief / psychedelic) ----------
    Each system sets --ds-* variables on its wrapper (lib/design-systems/*, components/ds/theme.tsx).
    Components only ever reference the ds-* utilities below, so they restyle per theme. */
 @theme inline {
@@ -84,8 +84,8 @@ body {
 /* Type roles */
 @utility ds-display { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-display-size); line-height: var(--ds-type-display-line); font-weight: var(--ds-type-display-weight); letter-spacing: var(--ds-type-display-tracking); text-transform: var(--ds-type-display-transform); }
 @utility ds-h1 { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h1-size); line-height: var(--ds-type-h1-line); font-weight: var(--ds-type-h1-weight); letter-spacing: var(--ds-type-h1-tracking); text-transform: var(--ds-type-h1-transform); }
-@utility ds-h2 { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h2-size); line-height: var(--ds-type-h2-line); font-weight: var(--ds-type-h2-weight); letter-spacing: var(--ds-type-h2-tracking); text-transform: var(--ds-type-h2-transform); }
-@utility ds-h3 { font-family: var(--ds-font-display); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h3-size); line-height: var(--ds-type-h3-line); font-weight: var(--ds-type-h3-weight); letter-spacing: var(--ds-type-h3-tracking); text-transform: var(--ds-type-h3-transform); }
+@utility ds-h2 { font-family: var(--ds-font-heading); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h2-size); line-height: var(--ds-type-h2-line); font-weight: var(--ds-type-h2-weight); letter-spacing: var(--ds-type-h2-tracking); text-transform: var(--ds-type-h2-transform); }
+@utility ds-h3 { font-family: var(--ds-font-heading); font-variation-settings: var(--ds-fvs); font-size: var(--ds-type-h3-size); line-height: var(--ds-type-h3-line); font-weight: var(--ds-type-h3-weight); letter-spacing: var(--ds-type-h3-tracking); text-transform: var(--ds-type-h3-transform); }
 @utility ds-body { font-family: var(--ds-font-body); font-size: var(--ds-type-body-size); line-height: var(--ds-type-body-line); font-weight: var(--ds-type-body-weight); letter-spacing: var(--ds-type-body-tracking); text-transform: var(--ds-type-body-transform); }
 @utility ds-body-strong { font-family: var(--ds-font-body); font-size: var(--ds-type-bodyStrong-size); line-height: var(--ds-type-bodyStrong-line); font-weight: var(--ds-type-bodyStrong-weight); letter-spacing: var(--ds-type-bodyStrong-tracking); text-transform: var(--ds-type-bodyStrong-transform); }
 @utility ds-caption { font-family: var(--ds-font-body); font-size: var(--ds-type-caption-size); line-height: var(--ds-type-caption-line); font-weight: var(--ds-type-caption-weight); letter-spacing: var(--ds-type-caption-tracking); text-transform: var(--ds-type-caption-transform); }

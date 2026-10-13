@@ -1,4 +1,4 @@
-// Shared shape of a design system. Each system (jungle, minimalistic, psychedelic) fills this in;
+// Shared shape of a design system. Each system (jungle, relief, psychedelic) fills this in;
 // `designVars` turns it into --ds-* CSS variables that the shared components and Tailwind utilities read.
 
 export const COLOR_KEYS = [
@@ -14,7 +14,7 @@ export type ColorRole = { key: ColorKey; name: string; hex: string; use: string 
 export type TypeRole = {
   key: "display" | "h1" | "h2" | "h3" | "body" | "bodyStrong" | "caption" | "label";
   name: string;
-  family: "display" | "body";
+  family: "display" | "heading" | "body";
   size: string;
   sizeLabel: string;
   line: string;
@@ -38,9 +38,25 @@ export type DesignSystem = {
   summary: string;
   cover: string;
   intro: string;
-  fonts: { display: string; body: string; displayName: string; bodyName: string; fvs: string; typeIntro: string };
+  fonts: {
+    display: string;
+    /** Optional second heading face for sizes where the display face breaks down. Defaults to display. */
+    heading?: string;
+    body: string;
+    displayName: string;
+    headingName?: string;
+    bodyName: string;
+    fvs: string;
+    typeIntro: string;
+  };
   colors: ColorRole[];
   colorIntro: string;
+  /** Optional tint ramps (e.g. one ink at several strengths), shown under the color roles. */
+  ramps?: { name: string; note: string; steps: { label: string; hex: string }[] }[];
+  /** Optional page texture, a CSS background-image value (e.g. paper grain). */
+  texture?: string;
+  /** Show the duotone photo treatments in the imagery section. */
+  duotone?: boolean;
   contrastNote: string;
   typeRoles: TypeRole[];
   spacing: { note: string; base: number; steps: { token: string; px: number }[] };
@@ -57,6 +73,23 @@ export type DesignSystem = {
     panel: string;
     modal: string;
   };
+};
+
+// A candidate display + body font pairing, used by the per-system "font options" pages.
+export type Pairing = {
+  id: string;
+  name: string;
+  display: string;
+  body: string;
+  displayName: string;
+  bodyName: string;
+  mood: string;
+  /** Display weights per role, since each family offers different weights. */
+  weights: { display: number; h1: number; h2: number; h3: number; bodyStrong: number };
+  tracking: string;
+  /** Wide or tall faces may need their own sizes and line heights. */
+  sizes?: { display: string; h1: string; h2: string; h3: string };
+  line?: string;
 };
 
 // ---------- contrast (WCAG 2.x) ----------
@@ -131,6 +164,7 @@ export function designVars(system: DesignSystem): Record<string, string> {
     v[`--ds-type-${t.key}-transform`] = t.uppercase ? "uppercase" : "none";
   }
   v["--ds-font-display"] = system.fonts.display;
+  v["--ds-font-heading"] = system.fonts.heading ?? system.fonts.display;
   v["--ds-font-body"] = system.fonts.body;
   v["--ds-fvs"] = system.fonts.fvs;
   v["--ds-bw"] = system.bw.line;

@@ -11,13 +11,13 @@ export const jungle: DesignSystem = {
   intro:
     "The Peruvian Amazon after dark: deep canopy greens, the ochre and terracotta of Nazca-line textiles, and the flash of macaw red. Photography does the loud work, so the interface stays low and green around it.",
   fonts: {
-    display: "var(--font-bricolage)",
-    body: "var(--font-figtree)",
-    displayName: "Bricolage Grotesque",
-    bodyName: "Figtree",
+    display: "var(--font-young-serif)",
+    body: "var(--font-instrument-sans)",
+    displayName: "Young Serif",
+    bodyName: "Instrument Sans",
     fvs: "normal",
     typeIntro:
-      "Bricolage Grotesque is a sturdy sans with quirky, hand-cut details, like carved or painted signage, and none of the retro flourish the other two systems lean on. Figtree keeps body copy and labels clean and legible.",
+      "Young Serif is a warm, slightly rustic old-style serif, the kind of lettering found in the credits on a 1970s record sleeve. Instrument Sans keeps body copy and labels clean and neutral beside it.",
   },
   colorIntro: "Every color has a job. Roles, not hues, are what components reference.",
   contrastNote: "WCAG 2.x. Text needs 4.5:1, UI outlines and focus rings need 3:1. Ratios are computed from the token values.",
@@ -43,10 +43,10 @@ export const jungle: DesignSystem = {
     { key: "paper", name: "Paper", hex: "#F5EBD3", use: "Tiles behind cut-out photos." },
   ],
   typeRoles: [
-    { key: "display", name: "Display", family: "display", size: "clamp(2.75rem, 7vw, 5rem)", sizeLabel: "44 to 80px", line: "1.02", weight: 800, tracking: "-0.02em", sample: "Los Mirlos Meets The World" },
-    { key: "h1", name: "Heading 1", family: "display", size: "clamp(2rem, 4.5vw, 3rem)", sizeLabel: "32 to 48px", line: "1.1", weight: 700, tracking: "-0.015em", sample: "El Sonido Selvático" },
-    { key: "h2", name: "Heading 2", family: "display", size: "1.75rem", sizeLabel: "28px", line: "1.2", weight: 700, tracking: "-0.01em", sample: "Amazonian cumbia, electrified" },
-    { key: "h3", name: "Heading 3", family: "display", size: "1.375rem", sizeLabel: "22px", line: "1.3", weight: 600, tracking: "0", sample: "Tarapoto, 1970s" },
+    { key: "display", name: "Display", family: "display", size: "clamp(2.75rem, 7vw, 5rem)", sizeLabel: "44 to 80px", line: "1.02", weight: 400, tracking: "-0.005em", sample: "Los Mirlos Meets The World" },
+    { key: "h1", name: "Heading 1", family: "display", size: "clamp(2rem, 4.5vw, 3rem)", sizeLabel: "32 to 48px", line: "1.1", weight: 400, tracking: "-0.005em", sample: "El Sonido Selvático" },
+    { key: "h2", name: "Heading 2", family: "display", size: "1.75rem", sizeLabel: "28px", line: "1.2", weight: 400, tracking: "-0.005em", sample: "Amazonian cumbia, electrified" },
+    { key: "h3", name: "Heading 3", family: "display", size: "1.375rem", sizeLabel: "22px", line: "1.3", weight: 400, tracking: "-0.005em", sample: "Tarapoto, 1970s" },
     { key: "body", name: "Body", family: "body", size: "1.0625rem", sizeLabel: "17px", line: "1.65", weight: 400, tracking: "0", sample: "Surf guitars, congas and güiro carried the sound of the Peruvian jungle to the rest of the world." },
     { key: "bodyStrong", name: "Body strong", family: "body", size: "1.0625rem", sizeLabel: "17px", line: "1.65", weight: 600, tracking: "0", sample: "Recorded in Lima, played everywhere." },
     { key: "caption", name: "Caption", family: "body", size: "0.875rem", sizeLabel: "14px", line: "1.5", weight: 400, tracking: "0.005em", sample: "Photo: archive scan, 1973 pressing" },

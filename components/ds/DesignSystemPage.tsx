@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { borderTokens, contrastPairs, type DesignSystem } from "@/lib/design-systems/types";
 import { DesignTheme } from "@/components/ds/theme";
 import { Badge, Button, Checkbox, Chip, ChipGroup, Radio, Select, TextInput, TextLink, Toggle } from "@/components/ds/controls";
-import { Card, CoverFrame, CutoutTile, DetailPanel, Divider, ModalDemo, NavBar, PullQuote, Tabs, TrackRow } from "@/components/ds/surfaces";
+import { Card, CoverFrame, CutoutTile, DetailPanel, Divider, DuotoneImage, ModalDemo, NavBar, PullQuote, Tabs, TrackRow } from "@/components/ds/surfaces";
 import { Alert, EmptyState, ErrorState, LoadingCard, Spinner, SuccessState } from "@/components/ds/feedback";
 
 const nav = [
@@ -150,6 +150,22 @@ export function DesignSystemPage({ system }: { system: DesignSystem }) {
             </ul>
           </Sub>
 
+          {system.ramps?.map((ramp) => (
+            <Sub key={ramp.name} title={ramp.name} note={ramp.note}>
+              <ul className="grid grid-cols-5 overflow-hidden rounded-ds-md border border-ds-border-subtle">
+                {ramp.steps.map((step) => (
+                  <li key={step.label} className="flex flex-col">
+                    <div className="h-20" style={{ background: step.hex }} />
+                    <div className="bg-ds-surface p-3">
+                      <p className="ds-body-strong">{step.label}</p>
+                      <code className="ds-caption text-ds-muted">{step.hex}</code>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Sub>
+          ))}
+
           <Sub title="Contrast ratios" note={system.contrastNote}>
             <div className="overflow-x-auto rounded-ds-lg border border-ds-border-subtle bg-ds-surface">
               <table className="w-full min-w-[40rem] border-collapse text-left">
@@ -200,7 +216,7 @@ export function DesignSystemPage({ system }: { system: DesignSystem }) {
                 <div>
                   <p className="ds-label text-ds-accent-2">{t.name}</p>
                   <p className="ds-caption mt-2 text-ds-muted">
-                    {t.family === "display" ? system.fonts.displayName : system.fonts.bodyName} · {t.weight}
+                    {t.family === "display" ? system.fonts.displayName : t.family === "heading" ? system.fonts.headingName ?? system.fonts.displayName : system.fonts.bodyName} · {t.weight}
                     <br />
                     {t.sizeLabel} / {t.line}
                     <br />
@@ -561,6 +577,17 @@ export function DesignSystemPage({ system }: { system: DesignSystem }) {
               </figure>
             </Sub>
           </div>
+
+          {system.duotone && (
+            <Sub title="Duotone treatment" note="Photos are printed in one ink: a grayscale image multiplied onto a flat color, no extra files needed. Use the original when color matters, the ink or color versions for the print look.">
+              <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+                <DuotoneImage src="/photos/bandaCAmisasTigreInstrumentos.jpg" alt="The band, original photo" label="Original" tone="original" />
+                <DuotoneImage src="/photos/bandaCAmisasTigreInstrumentos.jpg" alt="The band, black ink on paper" label="Ink on paper" tone="ink" />
+                <DuotoneImage src="/photos/bandaCAmisasTigreInstrumentos.jpg" alt="The band, in the accent ink" label="Accent ink" tone="accent" />
+                <DuotoneImage src="/photos/bandaCAmisasTigreInstrumentos.jpg" alt="The band, in a soft tint" label="Soft tint" tone="tint" />
+              </div>
+            </Sub>
+          )}
 
           <Sub title="Band cut-out" note="The transparent band PNG sits on a color field and can break out of its frame.">
             <div className="relative overflow-hidden rounded-ds-sig bg-ds-accent-2 px-6 pt-10">

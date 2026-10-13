@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Bricolage_Grotesque, Figtree, Geist, Geist_Mono, Libre_Franklin, Nunito, Shrikhand } from "next/font/google";
+import { Alfa_Slab_One, Fredoka, Geist, Geist_Mono, Instrument_Sans, Libre_Franklin, Modak, Young_Serif } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,18 +12,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const youngSerif = Young_Serif({
+  variable: "--font-young-serif",
+  weight: "400",
   subsets: ["latin"],
 });
 
-const figtree = Figtree({
-  variable: "--font-figtree",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
 });
 
-const anton = Anton({
-  variable: "--font-anton",
+const alfaSlab = Alfa_Slab_One({
+  variable: "--font-alfa-slab",
   weight: "400",
   subsets: ["latin"],
 });
@@ -33,14 +34,14 @@ const libreFranklin = Libre_Franklin({
   subsets: ["latin"],
 });
 
-const shrikhand = Shrikhand({
-  variable: "--font-shrikhand",
+const modak = Modak({
+  variable: "--font-modak",
   weight: "400",
   subsets: ["latin"],
 });
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
   subsets: ["latin"],
 });
 
@@ -53,7 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} ${figtree.variable} ${anton.variable} ${libreFranklin.variable} ${shrikhand.variable} ${nunito.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${youngSerif.variable} ${instrumentSans.variable} ${alfaSlab.variable} ${libreFranklin.variable} ${modak.variable} ${fredoka.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

@@ -19,7 +19,7 @@ export default async function MoodboardPage({ params }: { params: Promise<{ slug
   const board = moodboards.find((b) => b.slug === slug);
   if (!board) notFound();
 
-  const images = getMoodboardImages(slug);
+  const images = getMoodboardImages(board.folder);
 
   return (
     <main className="mx-auto w-full max-w-7xl px-6 py-12">
