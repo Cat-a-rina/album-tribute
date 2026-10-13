@@ -74,7 +74,7 @@ export function PatternStrip({
   const t = tiles[variant];
   const id = `motif-${variant}`;
   return (
-    <svg aria-hidden width="100%" height={t.h * scale} className={className} style={style}>
+    <svg aria-hidden data-motif width="100%" height={t.h * scale} className={className} style={style}>
       <defs>
         <pattern id={id} width={t.w * scale} height={t.h * scale} patternUnits="userSpaceOnUse">
           <g transform={`scale(${scale})`}>{t.body}</g>
@@ -90,7 +90,7 @@ export function PatternField({ variant, className }: { variant: Variant; classNa
   const t = tiles[variant];
   const id = `field-${variant}`;
   return (
-    <svg aria-hidden width="100%" height="100%" className={`pointer-events-none absolute inset-0 ${className ?? ""}`}>
+    <svg aria-hidden data-motif width="100%" height="100%" className={`pointer-events-none absolute inset-0 ${className ?? ""}`}>
       <defs>
         <pattern id={id} width={t.w * 1.4} height={t.h * 1.4} patternUnits="userSpaceOnUse">
           <g transform="scale(1.4)">{t.body}</g>
@@ -105,17 +105,17 @@ export function PatternField({ variant, className }: { variant: Variant; classNa
 export function SectionBreak({ variant }: { variant: "fret" | "chakana" }) {
   if (variant === "fret") {
     return (
-      <div aria-hidden className="flex flex-col gap-1.5 text-ds-accent opacity-90">
+      <div aria-hidden data-motif className="flex flex-col gap-1.5 text-ds-accent-text opacity-90">
         <PatternStrip variant="fret" />
         <PatternStrip variant="kene" scale={0.5} className="text-ds-accent-2" />
       </div>
     );
   }
   return (
-    <div aria-hidden className="mx-auto flex w-full max-w-6xl items-center gap-5 px-6">
+    <div aria-hidden data-motif className="mx-auto flex w-full max-w-6xl items-center gap-5 px-6">
       <span className="h-px flex-1 bg-ds-border" />
       <Chakana className="size-6 text-ds-accent-2" />
-      <Inti className="size-9 text-ds-accent" />
+      <Inti className="size-9 text-ds-accent-text" />
       <Chakana className="size-6 text-ds-accent-2" />
       <span className="h-px flex-1 bg-ds-border" />
     </div>

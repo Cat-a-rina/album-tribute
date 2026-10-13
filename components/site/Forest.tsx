@@ -5,8 +5,8 @@ import { PatternField } from "./motifs";
 
 export function Forest() {
   return (
-    <section id="forest" className="scroll-mt-8 py-20 sm:py-28">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-6">
+    <section id="forest" className="scroll-mt-28 py-20 sm:py-28">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-4 sm:px-6">
         {/* Intro */}
         <div className="grid items-end gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
           <div>
@@ -29,7 +29,7 @@ export function Forest() {
           </p>
           <ul className="mt-10 grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
             {instruments.map((it) => (
-              <li key={it.name} className="flex flex-col gap-3">
+              <li key={it.name} className="ds-lift flex flex-col gap-3 [&_img]:transition-transform [&_img]:duration-300 hover:[&_img]:scale-110">
                 <CutoutTile src={it.src} alt={it.name} label={it.name} tone={it.tone} />
                 <p className="ds-caption text-ds-muted">{it.role}</p>
               </li>

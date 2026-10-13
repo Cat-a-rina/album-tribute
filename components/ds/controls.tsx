@@ -43,6 +43,21 @@ export function Button({ variant = "primary", size = "md", className, ...props }
   );
 }
 
+/** A link that looks like a Button. Use for navigation (anchors, external pages). */
+export function ButtonLink({
+  variant = "primary",
+  size = "md",
+  className,
+  ...props
+}: AnchorHTMLAttributes<HTMLAnchorElement> & ForceProp & { variant?: "primary" | "secondary" | "ghost"; size?: "md" | "lg" }) {
+  return (
+    <a
+      {...props}
+      className={cx(buttonBase, buttonVariants[variant], size === "lg" ? "h-14 px-8 text-[0.8125rem]" : "h-11 px-5", className)}
+    />
+  );
+}
+
 // ---------- Link ----------
 export function TextLink({
   className,
@@ -196,10 +211,15 @@ export function Radio({ label, className, ...props }: ChoiceProps) {
 
 // ---------- Toggle ----------
 type ToggleProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> &
-  ForceProp & { label: string; defaultOn?: boolean };
+  ForceProp & { label: string; defaultOn?: boolean; checked?: boolean; onCheckedChange?: (on: boolean) => void };
 
-export function Toggle({ label, defaultOn = false, className, ...props }: ToggleProps) {
-  const [on, setOn] = useState(defaultOn);
+export function Toggle({ label, defaultOn = false, checked, onCheckedChange, className, ...props }: ToggleProps) {
+  const [inner, setInner] = useState(defaultOn);
+  const on = checked ?? inner;
+  const setOn = (v: boolean) => {
+    setInner(v);
+    onCheckedChange?.(v);
+  };
   return (
     <span className="inline-flex items-center gap-3 ds-body">
       <button

@@ -1,11 +1,11 @@
-import { DesignTheme } from "@/components/ds/theme";
 import { Forest } from "@/components/site/Forest";
 import { Hero } from "@/components/site/Hero";
 import { SectionBreak } from "@/components/site/motifs";
+import { Reveal } from "@/components/site/Reveal";
+import { SiteShell } from "@/components/site/SiteShell";
 import { TinyDesk } from "@/components/site/TinyDesk";
 import { Tour } from "@/components/site/Tour";
 import { Tracklist } from "@/components/site/Tracklist";
-import { jungle } from "@/lib/design-systems/jungle";
 
 export const metadata = {
   title: "The World Meets Los Mirlos",
@@ -14,19 +14,27 @@ export const metadata = {
 
 export default function SitePage() {
   return (
-    <DesignTheme system={jungle} className="min-h-screen">
+    <SiteShell>
       <main>
         <Hero />
         <SectionBreak variant="fret" />
-        <TinyDesk />
+        <Reveal>
+          <TinyDesk />
+        </Reveal>
         <SectionBreak variant="chakana" />
-        <Tracklist />
+        <Reveal>
+          <Tracklist />
+        </Reveal>
         <SectionBreak variant="fret" />
-        <Forest />
+        <Reveal>
+          <Forest />
+        </Reveal>
         <SectionBreak variant="chakana" />
-        <Tour />
+        <Reveal>
+          <Tour />
+        </Reveal>
         <SectionBreak variant="fret" />
       </main>
-    </DesignTheme>
+    </SiteShell>
   );
 }

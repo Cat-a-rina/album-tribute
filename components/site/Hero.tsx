@@ -1,5 +1,5 @@
 import { Band } from "@/components/ds/band";
-import { Badge } from "@/components/ds/controls";
+import { Badge, ButtonLink } from "@/components/ds/controls";
 import { Chakana } from "./motifs";
 
 export const ALBUM = {
@@ -13,7 +13,7 @@ export const ALBUM = {
 /** The first screen: the album cover, its title, and who it is by. */
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-screen flex-col overflow-hidden">
+    <section className="relative isolate flex min-h-[calc(100svh-6.5rem)] flex-col md:min-h-[calc(100svh-3.5rem)] overflow-hidden">
       {/* Faint green lift at the top, no warm glow */}
       <div
         aria-hidden
@@ -23,7 +23,7 @@ export function Hero() {
 
       <Band edge="top" />
 
-      <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-12 px-6 py-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)] lg:gap-16 lg:py-20">
+      <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-12 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1fr)] lg:gap-16 lg:py-20">
         {/* Cover */}
         <div className="ds-rise mx-auto w-full max-w-[34rem] lg:max-w-none">
           <div className="overflow-hidden rounded-ds-lg bg-ds-surface shadow-ds-3">
@@ -64,8 +64,26 @@ export function Hero() {
           <p className="ds-body ds-rise max-w-md text-ds-muted" style={{ animationDelay: "460ms" }}>
             Amazonian cumbia, turned psychedelic, with a different featured guest on every song.
           </p>
+
+          <div className="ds-rise flex flex-wrap gap-3" style={{ animationDelay: "560ms" }}>
+            <ButtonLink href="#tiny-desk" size="lg">
+              Watch the story
+            </ButtonLink>
+            <ButtonLink href="#tracklist" variant="secondary" size="lg">
+              Meet the guests
+            </ButtonLink>
+          </div>
         </div>
       </div>
+
+      <a
+        href="#tiny-desk"
+        aria-label="Scroll to the next section"
+        data-motif
+        className="ds-bob mx-auto mb-5 hidden size-11 items-center justify-center rounded-full text-ds-accent-text outline-none fx-focus:ds-focus-ring sm:flex"
+      >
+        <span aria-hidden className="text-2xl leading-none">↓</span>
+      </a>
 
       <Band edge="bottom" />
     </section>

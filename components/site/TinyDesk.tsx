@@ -6,8 +6,8 @@ import { PatternField } from "./motifs";
 /** NPR Tiny Desk: the band carries the message to a US audience. */
 export function TinyDesk() {
   return (
-    <section id="tiny-desk" className="scroll-mt-8 py-20 sm:py-28">
-      <div className="mx-auto grid w-full max-w-6xl items-start gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+    <section id="tiny-desk" className="scroll-mt-28 py-20 sm:py-28">
+      <div className="mx-auto grid w-full max-w-6xl items-start gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
         <div>
           <p className="ds-label text-ds-accent-2">At the desk</p>
           <h2 className="ds-h1 mt-3 text-balance">Five songs and the story of the Amazon, at NPR&rsquo;s Tiny Desk</h2>
@@ -26,7 +26,7 @@ export function TinyDesk() {
           </p>
         </div>
 
-        <div className="relative overflow-hidden rounded-ds-lg bg-ds-surface shadow-ds-2">
+        <div className="ds-lift relative overflow-hidden rounded-ds-lg bg-ds-surface shadow-ds-2">
           <Band edge="top" />
           <PatternField variant="kene" className="text-ds-accent opacity-[0.07]" />
           <div className="relative flex flex-col gap-6 p-6">
@@ -38,7 +38,7 @@ export function TinyDesk() {
               <p className="ds-label text-ds-muted">The set</p>
               <ol className="mt-3 flex flex-col divide-y divide-ds-border-subtle">
                 {tinyDesk.songs.map((s, i) => (
-                  <li key={s} className="flex items-baseline gap-4 py-3">
+                  <li key={s} className="flex items-baseline gap-4 py-3 transition-transform fx-hover:translate-x-1">
                     <span className="ds-label w-6 text-ds-accent-2">{String(i + 1).padStart(2, "0")}</span>
                     <span className="ds-h3">{s}</span>
                   </li>

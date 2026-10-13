@@ -111,3 +111,27 @@ body {
 @media (prefers-reduced-motion: reduce) {
   [class*="ds-rise"] { animation: none; }
 }
+
+/* Hover lift, only on devices that really hover (no sticky hover on phones). */
+@utility ds-lift {
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.25s;
+  @media (hover: hover) {
+    &:hover { transform: translateY(-4px); }
+  }
+}
+
+/* Scroll reveal: Reveal sets data-reveal="pending" only on content below the fold, then "shown". */
+[data-reveal] { transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+[data-reveal="pending"] { opacity: 0; transform: translateY(24px); }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { transition: none; }
+  [data-reveal="pending"] { opacity: 1; transform: none; }
+}
+
+/* The Patterns switch hides every decorative motif. */
+[data-patterns="off"] [data-motif] { display: none; }
+
+/* Gentle idle motion for the hero scroll cue. */
+@keyframes ds-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+@utility ds-bob { animation: ds-bob 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { [class*="ds-bob"] { animation: none; } }

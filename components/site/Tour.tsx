@@ -1,13 +1,25 @@
+"use client";
+
+import { useState } from "react";
 import { Band } from "@/components/ds/band";
-import { Badge } from "@/components/ds/controls";
+import { Badge, Chip } from "@/components/ds/controls";
 import { tourLegs } from "@/lib/tour";
 import { PatternStrip } from "./motifs";
 
-/** The world tour, grouped by leg. */
+const filters = [
+  { key: "all", label: "All dates" },
+  { key: "upcoming", label: "Coming up" },
+  { key: "played", label: "Played" },
+] as const;
+
+/** The world tour, grouped by leg, with a filter. */
 export function Tour() {
+  const [filter, setFilter] = useState<(typeof filters)[number]["key"]>("all");
+  const legs = tourLegs.filter((l) => filter === "all" || l.status === filter);
+
   return (
-    <section id="tour" className="scroll-mt-8 py-20 sm:py-28">
-      <div className="mx-auto w-full max-w-6xl px-6">
+    <section id="tour" className="scroll-mt-28 py-20 sm:py-28">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <p className="ds-label text-ds-accent-2">On the road</p>
         <h2 className="ds-h1 mt-3 max-w-2xl text-balance">Taking the message to the world</h2>
         <p className="ds-body mt-4 max-w-2xl text-ds-muted">
@@ -15,12 +27,20 @@ export function Tour() {
           festivals such as the Montreal International Jazz Festival and Lima&rsquo;s Una Noche en Perú.
         </p>
 
-        <div className="mt-12 grid items-start gap-8 lg:grid-cols-2">
-          {tourLegs.map((leg) => (
-            <div key={leg.region} className="overflow-hidden rounded-ds-lg bg-ds-surface shadow-ds-2">
+        <div role="group" aria-label="Filter tour dates" className="mt-8 flex flex-wrap gap-2">
+          {filters.map((f) => (
+            <Chip key={f.key} selected={filter === f.key} onClick={() => setFilter(f.key)}>
+              {f.label}
+            </Chip>
+          ))}
+        </div>
+
+        <div className="mt-8 grid items-start gap-6 lg:grid-cols-2 lg:gap-8">
+          {legs.map((leg) => (
+            <div key={leg.region} className="ds-rise ds-lift overflow-hidden rounded-ds-lg bg-ds-surface shadow-ds-2" style={{ animationDuration: "500ms" }}>
               <Band edge="top" />
               <PatternStrip variant="kene" scale={0.6} className="mt-3 text-ds-accent-2 opacity-70" />
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h3 className="ds-h2">{leg.region}</h3>
                   <Badge tone={leg.status === "upcoming" ? "accent" : "neutral"}>
@@ -29,7 +49,7 @@ export function Tour() {
                 </div>
                 <ul className="mt-4 flex flex-col divide-y divide-ds-border-subtle">
                   {leg.shows.map((s) => (
-                    <li key={`${s.date}-${s.place}`} className="grid grid-cols-[6.5rem_1fr] gap-4 py-3">
+                    <li key={`${s.date}-${s.place}`} className="grid grid-cols-[5.5rem_1fr] gap-3 py-3 sm:grid-cols-[6.5rem_1fr] sm:gap-4">
                       <span className="ds-label pt-1 text-ds-accent-2">{s.date}</span>
                       <span>
                         <span className="ds-body-strong block">{s.place}</span>
