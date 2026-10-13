@@ -1,3 +1,4 @@
+import { resolvePalette } from "./palette";
 import type { DesignSystem } from "./types";
 
 const M = "/photos/minimalistic/";
@@ -27,27 +28,24 @@ export const relief: DesignSystem = {
   colorIntro:
     "A duotone: black ink and one vermilion on cream paper. Everything else is a tint of one of the two, the way a risograph builds shades from a single ink. Error and success are not separate hues: they are told apart by deep vermilion versus ink, and by their icons.",
   contrastNote: "WCAG 2.x. Text needs 4.5:1, UI outlines and focus rings need 3:1. Ratios are computed from the token values.",
-  colors: [
-    { key: "bg", name: "Paper", hex: "#F4EEDF", use: "Page background. Cream print paper, with a faint grain." },
-    { key: "surface", name: "Surface", hex: "#FBF8EF", use: "Cards, panels, inputs. A brighter sheet." },
-    { key: "raised", name: "Surface raised", hex: "#EFD8C7", use: "Hover, selected rows. A 12% vermilion tint." },
-    { key: "text", name: "Ink", hex: "#1B1614", use: "Primary copy and lines. Warm block-print black." },
-    { key: "muted", name: "Muted ink", hex: "#5A4D47", use: "Secondary copy, captions, placeholders." },
-    { key: "border", name: "Border", hex: "#1B1614", use: "Control outlines." },
-    { key: "border-subtle", name: "Border subtle", hex: "#CFC2AF", use: "Decorative dividers only." },
-    { key: "border-strong", name: "Border strong", hex: "#1B1614", use: "Buttons, selected and hover outlines." },
-    { key: "accent", name: "Vermilion", hex: "#C93A17", use: "Primary action fills. The one color ink." },
-    { key: "accent-hover", name: "Vermilion deep", hex: "#B02F10", use: "Accent on hover (a heavier ink laydown)." },
-    { key: "accent-pressed", name: "Vermilion darkest", hex: "#8F2209", use: "Accent on press." },
-    { key: "on-accent", name: "On accent", hex: "#FBF8EF", use: "Paper-colored text on vermilion fills." },
-    { key: "accent-text", name: "Accent text", hex: "#B02F10", use: "Links and accent-colored text." },
-    { key: "focus", name: "Focus", hex: "#1B1614", use: "Focus ring, with a soft vermilion halo." },
-    { key: "accent-2", name: "Deep vermilion", hex: "#8F2209", use: "Secondary accent. Eyebrows and rules." },
-    { key: "info", name: "Info ink", hex: "#4A3F3A", use: "Info. A softened ink, with an i icon." },
-    { key: "danger", name: "Danger", hex: "#9E1F0E", use: "Error. Deep vermilion, with a cross icon." },
-    { key: "success", name: "Success", hex: "#1B1614", use: "Success. Full ink, with a check icon." },
-    { key: "paper", name: "Bright paper", hex: "#FFFDF7", use: "Tiles behind cut-out photos." },
-  ],
+  colors: resolvePalette({
+    mode: "light",
+    core: {
+      "bg": { name: "Paper", hex: "#F4EEDF", use: "Page background. Cream print paper, with a faint grain." },
+      "surface": { name: "Surface", hex: "#FBF8EF", use: "Cards, panels, inputs. A brighter sheet." },
+      "text": { name: "Ink", hex: "#1B1614", use: "Primary copy and lines. Warm block-print black." },
+      "muted": { name: "Muted ink", hex: "#5A4D47", use: "Secondary copy, captions, placeholders." },
+      "border": { name: "Border", hex: "#1B1614", use: "Control outlines." },
+      "accent": { name: "Vermilion", hex: "#C93A17", use: "Primary action fills. The one color ink." },
+      "on-accent": { name: "On accent", hex: "#FBF8EF", use: "Paper-colored text on vermilion fills." },
+      "accent-2": { name: "Deep vermilion", hex: "#8F2209", use: "Secondary accent. Eyebrows and rules." },
+      "danger": { name: "Danger", hex: "#9E1F0E", use: "Error. Deep vermilion, with a cross icon." },
+      "success": { name: "Success", hex: "#1B1614", use: "Success. Full ink, with a check icon." },
+      "accent-text": { name: "Accent text", hex: "#B02F10", use: "Links and accent-colored text. A deeper vermilion." },
+    },
+    strong: "text",
+    raised: { with: "accent", amount: 0.12 },
+  }),
   ramps: [
     {
       name: "Vermilion ramp",
@@ -75,7 +73,7 @@ export const relief: DesignSystem = {
   texture: grain,
   duotone: true,
   typeRoles: [
-    { key: "display", name: "Display", family: "display", size: "clamp(2.75rem, 8vw, 6rem)", sizeLabel: "44 to 96px", line: "1", weight: 400, tracking: "-0.01em", sample: "Los Mirlos Meets The World" },
+    { key: "display", name: "Display", family: "display", size: "clamp(2.75rem, 8vw, 6rem)", sizeLabel: "44 to 96px", line: "1", weight: 400, tracking: "-0.01em", sample: "The World Meets Los Mirlos" },
     { key: "h1", name: "Heading 1", family: "display", size: "clamp(2rem, 4.8vw, 3.25rem)", sizeLabel: "32 to 52px", line: "1.05", weight: 400, tracking: "-0.005em", sample: "El Sonido Selvático" },
     { key: "h2", name: "Heading 2", family: "display", size: "1.875rem", sizeLabel: "30px", line: "1.15", weight: 400, tracking: "0", sample: "Amazonian cumbia, electrified" },
     { key: "h3", name: "Heading 3", family: "display", size: "1.375rem", sizeLabel: "22px", line: "1.2", weight: 400, tracking: "0", sample: "Tarapoto, 1970s" },

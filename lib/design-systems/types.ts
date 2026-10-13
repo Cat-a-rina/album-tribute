@@ -9,7 +9,7 @@ export const COLOR_KEYS = [
 ] as const;
 export type ColorKey = (typeof COLOR_KEYS)[number];
 
-export type ColorRole = { key: ColorKey; name: string; hex: string; use: string };
+export type ColorRole = { key: ColorKey; name: string; hex: string; use: string; /** Set when the color is computed from the core roles rather than chosen. */ derived?: string };
 
 export type TypeRole = {
   key: "display" | "h1" | "h2" | "h3" | "body" | "bodyStrong" | "caption" | "label";
@@ -55,6 +55,19 @@ export type DesignSystem = {
   ramps?: { name: string; note: string; steps: { label: string; hex: string }[] }[];
   /** Optional page texture, a CSS background-image value (e.g. paper grain). */
   texture?: string;
+  /** Optional card layout overrides. Defaults give a full-bleed image with a bordered frame. */
+  card?: {
+    /** Border width. Use "0px" for borderless cards. */
+    borderWidth?: string;
+    /** Padding around the image and text (inset image). */
+    padding?: string;
+    textPadding?: string;
+    imageRadius?: string;
+    /** Outline width drawn around a selected card (for borderless cards). */
+    selectOutline?: string;
+    /** Woven band across the top and bottom edge. `pattern` is a CSS `background` value. */
+    band?: { pattern: string; top: string; bottom: string };
+  };
   /** Show the duotone photo treatments in the imagery section. */
   duotone?: boolean;
   contrastNote: string;
@@ -168,6 +181,14 @@ export function designVars(system: DesignSystem): Record<string, string> {
   v["--ds-font-body"] = system.fonts.body;
   v["--ds-fvs"] = system.fonts.fvs;
   v["--ds-bw"] = system.bw.line;
+  v["--ds-card-bw"] = system.card?.borderWidth ?? system.bw.line;
+  v["--ds-card-pad"] = system.card?.padding ?? "0px";
+  v["--ds-card-text-pad"] = system.card?.textPadding ?? "1.25rem";
+  v["--ds-card-img-radius"] = system.card?.imageRadius ?? "0px";
+  v["--ds-card-select-w"] = system.card?.selectOutline ?? "0px";
+  v["--ds-band"] = system.card?.band?.pattern ?? "none";
+  v["--ds-band-top"] = system.card?.band?.top ?? "0px";
+  v["--ds-band-bottom"] = system.card?.band?.bottom ?? "0px";
   v["--ds-bw-strong"] = system.bw.strong;
   v["--ds-frame"] = system.frame.value;
   v["--ds-divider"] = system.divider.value;

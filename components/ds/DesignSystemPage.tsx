@@ -133,9 +133,9 @@ export function DesignSystemPage({ system }: { system: DesignSystem }) {
 
         {/* Color */}
         <Section id="color" eyebrow="Foundations" title="Color roles" intro={system.colorIntro}>
-          <Sub title="Roles">
+          <Sub title="Core roles" note={`${system.colors.filter((c) => !c.derived).length} colors, chosen by hand. Everything on this page is built from these.`}>
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {system.colors.map((c) => (
+              {system.colors.filter((c) => !c.derived).map((c) => (
                 <li key={c.key} className="overflow-hidden rounded-ds-md border border-ds-border-subtle bg-ds-surface">
                   <div className="h-20 border-b border-ds-border-subtle" style={{ background: c.hex }} />
                   <div className="p-4">
@@ -144,6 +144,20 @@ export function DesignSystemPage({ system }: { system: DesignSystem }) {
                       <code className="ds-caption text-ds-muted">{c.hex}</code>
                     </div>
                     <p className="ds-caption mt-1 text-ds-muted">{c.use}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Sub>
+
+          <Sub title="Derived colors" note="Not chosen separately: computed from the core roles, so they always stay in step with them.">
+            <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {system.colors.filter((c) => c.derived).map((c) => (
+                <li key={c.key} className="flex items-center gap-3 rounded-ds-md border border-ds-border-subtle bg-ds-surface p-3">
+                  <span className="size-10 shrink-0 rounded-ds-sm border border-ds-border-subtle" style={{ background: c.hex }} />
+                  <div className="min-w-0">
+                    <p className="ds-body-strong truncate">{c.name}</p>
+                    <p className="ds-caption text-ds-muted">{c.derived}</p>
                   </div>
                 </li>
               ))}
@@ -488,7 +502,7 @@ export function DesignSystemPage({ system }: { system: DesignSystem }) {
             <div className="grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 ["Rest", <Card key="a" src={imgA} eyebrow="Gallery" title="El Sonido Selvático" meta="1973 pressing" />],
-                ["Hover", <Card key="b" src={imgB} eyebrow="Gallery" title="Los Mirlos Meets The World" meta="2026 release" state="hover" />],
+                ["Hover", <Card key="b" src={imgB} eyebrow="Gallery" title="The World Meets Los Mirlos" meta="2026 release" state="hover" />],
                 ["Selected", <Card key="c" src={imgC} eyebrow="Artwork" title="Cumbia amazónica" meta="Selected" state="selected" />],
                 ["Disabled", <Card key="d" src={imgD} eyebrow="Artwork" title="Unreleased sleeve" meta="Unavailable" state="disabled" />],
               ].map(([label, card]) => (
@@ -565,7 +579,7 @@ export function DesignSystemPage({ system }: { system: DesignSystem }) {
           <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
             <Sub title="Album covers" note="Square, inside the system frame.">
               <div className="grid grid-cols-2 gap-4">
-                <CoverFrame src="/photos/mirlos2026albumCover.jpeg" alt="Los Mirlos Meets The World, 2026 cover" caption="2026" />
+                <CoverFrame src="/photos/mirlos2026albumCover.jpeg" alt="The World Meets Los Mirlos, 2026 cover" caption="2026" />
                 <CoverFrame src="/photos/losMirlos1973cover.jpeg" alt="El Sonido Selvático, 1973 cover" caption="1973" />
               </div>
             </Sub>

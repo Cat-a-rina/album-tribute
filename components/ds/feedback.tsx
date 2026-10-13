@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Band } from "./band";
 import { Button } from "./controls";
 
 const cx = (...parts: (string | false | undefined)[]) => parts.filter(Boolean).join(" ");
@@ -52,13 +53,17 @@ export function Spinner({ label = "Loading" }: { label?: string }) {
 
 export function LoadingCard() {
   return (
-    <div aria-busy="true" aria-label="Loading" className="overflow-hidden rounded-ds-sig border-[length:var(--ds-bw)] border-ds-border-subtle bg-ds-surface">
-      <div className="ds-skeleton aspect-[16/9]" />
-      <div className="flex flex-col gap-3 p-5">
-        <div className="ds-skeleton h-3 w-1/3 rounded-full" />
-        <div className="ds-skeleton h-5 w-4/5 rounded-full" />
-        <div className="ds-skeleton h-3 w-1/2 rounded-full" />
+    <div aria-busy="true" aria-label="Loading" className="overflow-hidden rounded-ds-sig border-[length:var(--ds-card-bw)] border-ds-border-subtle bg-ds-surface">
+      <Band edge="top" />
+      <div style={{ padding: "var(--ds-card-pad)" }}>
+        <div className="ds-skeleton aspect-[16/9]" style={{ borderRadius: "var(--ds-card-img-radius)" }} />
+        <div className="flex flex-col gap-3" style={{ padding: "var(--ds-card-text-pad)" }}>
+          <div className="ds-skeleton h-3 w-1/3 rounded-full" />
+          <div className="ds-skeleton h-5 w-4/5 rounded-full" />
+          <div className="ds-skeleton h-3 w-1/2 rounded-full" />
+        </div>
       </div>
+      <Band edge="bottom" />
     </div>
   );
 }

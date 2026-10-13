@@ -104,3 +104,10 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .ds-skeleton, [class*="ds-skeleton"] { animation: none; }
 }
+
+/* Entrance: content rises into place. Stagger with animation-delay. */
+@keyframes ds-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@utility ds-rise { animation: ds-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  [class*="ds-rise"] { animation: none; }
+}

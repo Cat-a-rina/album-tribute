@@ -65,7 +65,7 @@ export function FontOptionsPage({
 
                   <div className="mt-8 grid items-start gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
                     <div className="flex flex-col gap-6">
-                      <h2 className="ds-display">Los Mirlos Meets The World</h2>
+                      <h2 className="ds-display">The World Meets Los Mirlos</h2>
                       <h3 className="ds-h1">El Sonido Selvático</h3>
                       <h4 className="ds-h2">Amazonian cumbia, electrified</h4>
                       <h5 className="ds-h3">Tarapoto, 1970s</h5>

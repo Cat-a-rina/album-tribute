@@ -8,7 +8,7 @@ export default function Home() {
       <header className="mb-16">
         <p className="text-sm uppercase tracking-widest text-foreground/60">Hub</p>
         <h1 className="mt-2 text-4xl font-semibold tracking-tight">
-          Los Mirlos Meets The World
+          The World Meets Los Mirlos
         </h1>
         <p className="mt-3 max-w-xl text-foreground/70">
           A tribute to the album by Los Mirlos. Moodboards, design systems and
@@ -73,9 +73,21 @@ export default function Home() {
 
       <section>
         <h2 className="mb-6 text-xl font-medium">Site</h2>
-        <p className="rounded-lg border border-dashed border-foreground/20 p-6 text-sm text-foreground/50">
-          Empty for now.
-        </p>
+        <ul className="grid gap-6 sm:grid-cols-3">
+          <li>
+            <Link
+              href="/site"
+              className="group block overflow-hidden rounded-lg border border-foreground/15 transition-colors hover:border-foreground/50"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/photos/mirlos2026albumCover.jpeg" alt="" className="aspect-[4/3] w-full object-cover" />
+              <div className="p-4">
+                <h3 className="font-medium group-hover:underline">Tribute site</h3>
+                <p className="mt-1 text-sm text-foreground/60">Jungle theme · in progress: opening screen</p>
+              </div>
+            </Link>
+          </li>
+        </ul>
       </section>
     </main>
   );

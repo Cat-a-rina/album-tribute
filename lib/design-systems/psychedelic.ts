@@ -1,3 +1,4 @@
+import { resolvePalette } from "./palette";
 import type { DesignSystem } from "./types";
 
 const P = "/photos/psychedelic/";
@@ -21,31 +22,28 @@ export const psychedelic: DesignSystem = {
     typeIntro:
       "Modak is inflated, melting, lava-lamp lettering, used only for the biggest headlines where its fat outline has room to breathe. Below that size it clogs, so smaller headings, body copy and labels all use Fredoka, a rounded sans in the same bubble family.",
   },
-  colorIntro: "A dark violet night so the saturated colors can glow. Hot pink drives action, marigold is the sun, and teal and green keep the palette from turning into one note.",
+  colorIntro: "A dark violet night so the saturated colors can glow. Hot pink drives action and marigold is the sun and the outline color. The rest of the board (teal, lime, orange) lives in the imagery, not the interface.",
   contrastNote: "WCAG 2.x. Text needs 4.5:1, UI outlines and focus rings need 3:1. Ratios are computed from the token values.",
-  colors: [
-    { key: "bg", name: "Background", hex: "#1A0B2E", use: "Page background. Ultraviolet night." },
-    { key: "surface", name: "Surface", hex: "#2A1250", use: "Cards, panels, inputs." },
-    { key: "raised", name: "Surface raised", hex: "#3A1B6B", use: "Hover, menus, modals, selected rows." },
-    { key: "text", name: "Text", hex: "#FFF3D6", use: "Primary copy. Warm poster cream." },
-    { key: "muted", name: "Muted text", hex: "#D8C2F2", use: "Secondary copy, captions, placeholders." },
-    { key: "border", name: "Border", hex: "#A27BE8", use: "Control outlines (meets 3:1 for UI)." },
-    { key: "border-subtle", name: "Border subtle", hex: "#4A2A82", use: "Decorative dividers only." },
-    { key: "border-strong", name: "Border strong", hex: "#FFC21A", use: "Buttons, selected and hover outlines." },
-    { key: "accent", name: "Accent (hot pink)", hex: "#FF4FA3", use: "Primary action fills." },
-    { key: "accent-hover", name: "Accent hover", hex: "#FF73B8", use: "Accent on hover." },
-    { key: "accent-pressed", name: "Accent pressed", hex: "#EE4A9C", use: "Accent on press." },
-    { key: "on-accent", name: "On accent", hex: "#1A0B2E", use: "Text and icons on pink." },
-    { key: "accent-text", name: "Accent text", hex: "#FF7DBA", use: "Links and accent-colored text." },
-    { key: "focus", name: "Focus", hex: "#FFC21A", use: "Focus ring." },
-    { key: "accent-2", name: "Marigold", hex: "#FFC21A", use: "Secondary accent. Sun, eyebrows, highlights." },
-    { key: "info", name: "Electric teal", hex: "#25D0DE", use: "Info." },
-    { key: "danger", name: "Flame", hex: "#FF7A59", use: "Error." },
-    { key: "success", name: "Lime", hex: "#4BE08C", use: "Success." },
-    { key: "paper", name: "Poster cream", hex: "#FFF3D6", use: "Tiles behind cut-out photos." },
-  ],
+  colors: resolvePalette({
+    mode: "dark",
+    core: {
+      "bg": { name: "Background", hex: "#1A0B2E", use: "Page background. Ultraviolet night." },
+      "surface": { name: "Surface", hex: "#2A1250", use: "Cards, panels, inputs." },
+      "text": { name: "Text", hex: "#FFF3D6", use: "Primary copy. Warm poster cream." },
+      "muted": { name: "Muted text", hex: "#D8C2F2", use: "Secondary copy, captions, placeholders." },
+      "border": { name: "Border", hex: "#A27BE8", use: "Control outlines (meets 3:1 for UI)." },
+      "accent": { name: "Accent (hot pink)", hex: "#FF4FA3", use: "Primary action fills." },
+      "on-accent": { name: "On accent", hex: "#1A0B2E", use: "Text and icons on pink." },
+      "accent-2": { name: "Marigold", hex: "#FFC21A", use: "Secondary accent and line color. Sun, eyebrows, outlines." },
+      "danger": { name: "Flame", hex: "#FF7A59", use: "Error." },
+      "success": { name: "Lime", hex: "#4BE08C", use: "Success." },
+      "accent-text": { name: "Accent text", hex: "#FF7DBA", use: "Links and accent-colored text. A lighter pink." },
+    },
+    strong: "accent-2",
+    raised: { with: "border", amount: 0.2 },
+  }),
   typeRoles: [
-    { key: "display", name: "Display", family: "display", size: "clamp(3rem, 9vw, 6.5rem)", sizeLabel: "48 to 104px", line: "0.95", weight: 400, tracking: "0", sample: "Los Mirlos Meets The World" },
+    { key: "display", name: "Display", family: "display", size: "clamp(3rem, 9vw, 6.5rem)", sizeLabel: "48 to 104px", line: "0.95", weight: 400, tracking: "0", sample: "The World Meets Los Mirlos" },
     { key: "h1", name: "Heading 1", family: "display", size: "clamp(2.25rem, 5vw, 3.5rem)", sizeLabel: "36 to 56px", line: "1", weight: 400, tracking: "0", sample: "El Sonido Selvático" },
     { key: "h2", name: "Heading 2", family: "heading", size: "2rem", sizeLabel: "32px", line: "1.15", weight: 700, tracking: "-0.005em", sample: "Amazonian cumbia, electrified" },
     { key: "h3", name: "Heading 3", family: "heading", size: "1.5rem", sizeLabel: "24px", line: "1.2", weight: 700, tracking: "-0.005em", sample: "Tarapoto, 1970s" },

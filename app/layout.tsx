@@ -46,7 +46,7 @@ const fredoka = Fredoka({
 });
 
 export const metadata: Metadata = {
-  title: "Los Mirlos Meets The World",
+  title: "The World Meets Los Mirlos",
   description: "A tribute to the album by Los Mirlos.",
 };
 

@@ -2,6 +2,7 @@
 
 import { useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { Band } from "./band";
 import { Badge, Button, type Force } from "./controls";
 
 const cx = (...parts: (string | false | undefined)[]) => parts.filter(Boolean).join(" ");
@@ -116,22 +117,28 @@ export function Card({
       data-force={force}
       aria-disabled={state === "disabled" || undefined}
       className={cx(
-        "group overflow-hidden rounded-ds-sig border-[length:var(--ds-bw)] bg-ds-surface shadow-ds-1 transition-[transform,box-shadow,border-color] duration-200",
-        state === "selected" ? "border-ds-border-strong shadow-ds-glow" : "border-ds-border",
+        "group overflow-hidden rounded-ds-sig border-[length:var(--ds-card-bw)] bg-ds-surface shadow-ds-1 transition-[transform,box-shadow,border-color] duration-200",
+        state === "selected"
+          ? "border-ds-border-strong shadow-ds-glow outline-[length:var(--ds-card-select-w)] outline-offset-2 outline-ds-border-strong"
+          : "border-ds-border",
         state === "disabled" && "opacity-50 grayscale",
         state !== "disabled" && "fx-hover:-translate-y-1 fx-hover:border-ds-border-strong fx-hover:shadow-ds-2",
         state === "hover" && "-translate-y-1 border-ds-border-strong shadow-ds-2",
       )}
     >
-      <div className="aspect-[4/3] overflow-hidden bg-ds-raised">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt} loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      <Band edge="top" />
+      <div style={{ padding: "var(--ds-card-pad)" }}>
+        <div className="aspect-[4/3] overflow-hidden bg-ds-raised" style={{ borderRadius: "var(--ds-card-img-radius)" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt={alt} loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        </div>
+        <div className="flex flex-col gap-1" style={{ padding: "var(--ds-card-text-pad)" }}>
+          {eyebrow && <p className="ds-label text-ds-accent-2">{eyebrow}</p>}
+          <h3 className="ds-h3">{title}</h3>
+          {meta && <p className="ds-caption text-ds-muted">{meta}</p>}
+        </div>
       </div>
-      <div className="flex flex-col gap-1 p-5">
-        {eyebrow && <p className="ds-label text-ds-accent-2">{eyebrow}</p>}
-        <h3 className="ds-h3">{title}</h3>
-        {meta && <p className="ds-caption text-ds-muted">{meta}</p>}
-      </div>
+      <Band edge="bottom" />
     </article>
   );
 }
@@ -198,42 +205,63 @@ export function DuotoneImage({
 }
 
 // ---------- List row (tracklist) ----------
+/** Pass `onSelect` to make the whole row a button (keyboard + pointer). Without it the row is static, as in the docs. */
 export function TrackRow({
   n,
   title,
   length,
   note,
   state = "rest",
+  selectedLabel = "Playing",
+  onSelect,
   force,
 }: {
   n: number;
   title: string;
-  length: string;
+  length?: string;
   note?: string;
   state?: "rest" | "selected" | "disabled";
+  selectedLabel?: string;
+  onSelect?: () => void;
   force?: Force;
 }) {
+  const content = (
+    <>
+      <span className="ds-label w-6 shrink-0 text-ds-muted tabular-nums">{String(n).padStart(2, "0")}</span>
+      <span className="min-w-0 flex-1">
+        <span className={cx("ds-body-strong block", state === "selected" && "text-ds-accent-text")}>{title}</span>
+        {note && <span className="ds-caption block text-ds-muted">{note}</span>}
+      </span>
+      {state === "selected" && <Badge tone="accent">{selectedLabel}</Badge>}
+      {state === "disabled" && <Badge>Unavailable</Badge>}
+      {length && <span className="ds-caption text-ds-muted tabular-nums">{length}</span>}
+    </>
+  );
+  const inner = "flex w-full items-center gap-4 px-4 py-3 text-left";
   return (
     <li
       data-force={force}
       aria-current={state === "selected" ? "true" : undefined}
       aria-disabled={state === "disabled" || undefined}
       className={cx(
-        "flex items-center gap-4 border-b border-ds-border-subtle px-4 py-3 outline-none transition-colors",
-        "fx-focus:bg-ds-raised fx-focus:shadow-[inset_0_0_0_2px_var(--ds-focus)]",
+        "border-b border-ds-border-subtle outline-none transition-colors",
+        !onSelect && "fx-focus:bg-ds-raised fx-focus:shadow-[inset_0_0_0_2px_var(--ds-focus)]",
         state === "selected" && "border-l-4 border-l-ds-border-strong bg-ds-raised",
         state === "rest" && "fx-hover:bg-ds-raised",
         state === "disabled" && "cursor-not-allowed opacity-45",
       )}
     >
-      <span className="ds-label w-6 text-ds-muted tabular-nums">{String(n).padStart(2, "0")}</span>
-      <span className="flex-1">
-        <span className={cx("ds-body-strong block", state === "selected" && "text-ds-accent-text")}>{title}</span>
-        {note && <span className="ds-caption block text-ds-muted">{note}</span>}
-      </span>
-      {state === "selected" && <Badge tone="accent">Playing</Badge>}
-      {state === "disabled" && <Badge>Unavailable</Badge>}
-      <span className="ds-caption text-ds-muted tabular-nums">{length}</span>
+      {onSelect ? (
+        <button
+          type="button"
+          onClick={onSelect}
+          className={cx(inner, "cursor-pointer outline-none focus-visible:bg-ds-raised focus-visible:shadow-[inset_0_0_0_2px_var(--ds-focus)]")}
+        >
+          {content}
+        </button>
+      ) : (
+        <div className={inner}>{content}</div>
+      )}
     </li>
   );
 }
